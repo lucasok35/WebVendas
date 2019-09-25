@@ -12,22 +12,22 @@ namespace WebVendas
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_CLIENTE
+    public partial class tb_cliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_CLIENTE()
+        public tb_cliente()
         {
-            this.TB_VENDA = new HashSet<TB_VENDA>();
+            this.tb_venda = new HashSet<tb_venda>();
         }
     
         public int id { get; set; }
+        public long cli_cpf { get; set; }
         public string cli_nome { get; set; }
         public string cli_fone { get; set; }
         public string cli_cidade { get; set; }
         public string cli_endereco { get; set; }
-        public int cli_cpf { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_VENDA> TB_VENDA { get; set; }
+        public virtual ICollection<tb_venda> tb_venda { get; set; }
     }
 }

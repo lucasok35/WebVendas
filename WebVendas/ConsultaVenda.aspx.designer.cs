@@ -10,7 +10,7 @@
 namespace WebVendas {
     
     
-    public partial class Venda {
+    public partial class ConsultaVenda {
         
         /// <summary>
         /// Controle form1.
@@ -22,40 +22,49 @@ namespace WebVendas {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Controle ddlFornecedor.
+        /// Controle txtNomeCliente.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFornecedor;
+        protected global::System.Web.UI.WebControls.TextBox txtNomeCliente;
         
         /// <summary>
-        /// Controle ddlCliente.
+        /// Controle txtFoneCliente.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCliente;
+        protected global::System.Web.UI.WebControls.TextBox txtFoneCliente;
         
         /// <summary>
-        /// Controle ddlMaterial.
+        /// Controle txtCidadeCliente.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMaterial;
+        protected global::System.Web.UI.WebControls.TextBox txtCidadeCliente;
         
         /// <summary>
-        /// Controle txtdatavenda.
+        /// Controle txtEnderecoCliente.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtdatavenda;
+        protected global::System.Web.UI.WebControls.TextBox txtEnderecoCliente;
+        
+        /// <summary>
+        /// Controle txtCpf.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCpf;
         
         /// <summary>
         /// Controle btnCadastrar.
@@ -67,31 +76,13 @@ namespace WebVendas {
         protected global::System.Web.UI.WebControls.Button btnCadastrar;
         
         /// <summary>
-        /// Controle GVVendas.
+        /// Controle GVCliente.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GVVendas;
-        
-        /// <summary>
-        /// Controle LocCliente.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize LocCliente;
-        
-        /// <summary>
-        /// Controle btnSalvar.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSalvar;
+        protected global::System.Web.UI.WebControls.GridView GVCliente;
         
         /// <summary>
         /// Controle lblmsg.

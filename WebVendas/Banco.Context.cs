@@ -13,10 +13,10 @@ namespace WebVendas
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class VendasDBEntities : DbContext
+    public partial class VendasDBEntities1 : DbContext
     {
-        public VendasDBEntities()
-            : base("name=VendasDBEntities")
+        public VendasDBEntities1()
+            : base("name=VendasDBEntities1")
         {
         }
     
@@ -25,10 +25,10 @@ namespace WebVendas
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<TB_CLIENTE> TB_CLIENTE { get; set; }
-        public virtual DbSet<TB_FORNECEDOR> TB_FORNECEDOR { get; set; }
-        public virtual DbSet<TB_MATERIAL> TB_MATERIAL { get; set; }
-        public virtual DbSet<TB_TIPO> TB_TIPO { get; set; }
-        public virtual DbSet<TB_VENDA> TB_VENDA { get; set; }
+        public virtual DbSet<tb_cliente> tb_cliente { get; set; }
+        public virtual DbSet<tb_fornecedor> tb_fornecedor { get; set; }
+        public virtual DbSet<tb_material> tb_material { get; set; }
+        public virtual DbSet<tb_tipo> tb_tipo { get; set; }
+        public virtual DbSet<tb_venda> tb_venda { get; set; }
     }
 }

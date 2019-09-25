@@ -4,30 +4,30 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="VendasDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="TB_CLIENTE">
+      <Schema Namespace="VendasDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_cliente">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cli_nome" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="cli_fone" Type="varchar" MaxLength="13" />
-          <Property Name="cli_cidade" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cli_cpf" Type="bigint" Nullable="false" />
+          <Property Name="cli_nome" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="cli_fone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cli_cidade" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="cli_endereco" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="cli_cpf" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="TB_FORNECEDOR">
+        <EntityType Name="tb_fornecedor">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="forn_cnpj" Type="bigint" Nullable="false" />
           <Property Name="forn_nome" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="forn_fone" Type="varchar" MaxLength="100" />
+          <Property Name="forn_fone" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="forn_cidade" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="forn_endereco" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="forn_cnpj" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="TB_MATERIAL">
+        <EntityType Name="tb_material">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -35,17 +35,17 @@
           <Property Name="mat_desc" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="data_ent" Type="date" Nullable="false" />
           <Property Name="id_tipo" Type="int" Nullable="false" />
-          <Property Name="mat_valor" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="mat_valor" Type="bigint" Nullable="false" />
           <Property Name="id_forn" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="TB_TIPO">
+        <EntityType Name="tb_tipo">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tipo_des" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="TB_VENDA">
+        <EntityType Name="tb_venda">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -55,123 +55,124 @@
           <Property Name="id_mat" Type="int" Nullable="false" />
           <Property Name="venda_data" Type="date" Nullable="false" />
         </EntityType>
-        <Association Name="FK_MATERIAL_FORNECEDOR">
-          <End Role="TB_FORNECEDOR" Type="Self.TB_FORNECEDOR" Multiplicity="1" />
-          <End Role="TB_MATERIAL" Type="Self.TB_MATERIAL" Multiplicity="*" />
+        <Association Name="FK_tb_material_tb_fornecedor">
+          <End Role="tb_fornecedor" Type="Self.tb_fornecedor" Multiplicity="1" />
+          <End Role="tb_material" Type="Self.tb_material" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_FORNECEDOR">
+            <Principal Role="tb_fornecedor">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="TB_MATERIAL">
+            <Dependent Role="tb_material">
               <PropertyRef Name="id_forn" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MATERIAL_TIPO">
-          <End Role="TB_TIPO" Type="Self.TB_TIPO" Multiplicity="1" />
-          <End Role="TB_MATERIAL" Type="Self.TB_MATERIAL" Multiplicity="*" />
+        <Association Name="FK_tb_material_tb_tipo">
+          <End Role="tb_tipo" Type="Self.tb_tipo" Multiplicity="1" />
+          <End Role="tb_material" Type="Self.tb_material" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_TIPO">
+            <Principal Role="tb_tipo">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="TB_MATERIAL">
+            <Dependent Role="tb_material">
               <PropertyRef Name="id_tipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VENDA_CLIENTE">
-          <End Role="TB_CLIENTE" Type="Self.TB_CLIENTE" Multiplicity="1" />
-          <End Role="TB_VENDA" Type="Self.TB_VENDA" Multiplicity="*" />
+        <Association Name="FK_tb_venda_tb_cliente">
+          <End Role="tb_cliente" Type="Self.tb_cliente" Multiplicity="1" />
+          <End Role="tb_venda" Type="Self.tb_venda" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_CLIENTE">
+            <Principal Role="tb_cliente">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="TB_VENDA">
+            <Dependent Role="tb_venda">
               <PropertyRef Name="id_cli" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VENDA_FORNECEDOR">
-          <End Role="TB_FORNECEDOR" Type="Self.TB_FORNECEDOR" Multiplicity="1" />
-          <End Role="TB_VENDA" Type="Self.TB_VENDA" Multiplicity="*" />
+        <Association Name="FK_tb_venda_tb_fornecedor">
+          <End Role="tb_fornecedor" Type="Self.tb_fornecedor" Multiplicity="1" />
+          <End Role="tb_venda" Type="Self.tb_venda" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_FORNECEDOR">
+            <Principal Role="tb_fornecedor">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="TB_VENDA">
+            <Dependent Role="tb_venda">
               <PropertyRef Name="id_fornec" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VENDA_MATERIAL">
-          <End Role="TB_MATERIAL" Type="Self.TB_MATERIAL" Multiplicity="1" />
-          <End Role="TB_VENDA" Type="Self.TB_VENDA" Multiplicity="*" />
+        <Association Name="FK_tb_venda_tb_material">
+          <End Role="tb_material" Type="Self.tb_material" Multiplicity="1" />
+          <End Role="tb_venda" Type="Self.tb_venda" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_MATERIAL">
+            <Principal Role="tb_material">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="TB_VENDA">
+            <Dependent Role="tb_venda">
               <PropertyRef Name="id_mat" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="VendasDBModelStoreContainer">
-          <EntitySet Name="TB_CLIENTE" EntityType="Self.TB_CLIENTE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_FORNECEDOR" EntityType="Self.TB_FORNECEDOR" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_MATERIAL" EntityType="Self.TB_MATERIAL" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_TIPO" EntityType="Self.TB_TIPO" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_VENDA" EntityType="Self.TB_VENDA" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_MATERIAL_FORNECEDOR" Association="Self.FK_MATERIAL_FORNECEDOR">
-            <End Role="TB_FORNECEDOR" EntitySet="TB_FORNECEDOR" />
-            <End Role="TB_MATERIAL" EntitySet="TB_MATERIAL" />
+          <EntitySet Name="tb_cliente" EntityType="Self.tb_cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_fornecedor" EntityType="Self.tb_fornecedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_material" EntityType="Self.tb_material" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_tipo" EntityType="Self.tb_tipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_venda" EntityType="Self.tb_venda" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tb_material_tb_fornecedor" Association="Self.FK_tb_material_tb_fornecedor">
+            <End Role="tb_fornecedor" EntitySet="tb_fornecedor" />
+            <End Role="tb_material" EntitySet="tb_material" />
           </AssociationSet>
-          <AssociationSet Name="FK_MATERIAL_TIPO" Association="Self.FK_MATERIAL_TIPO">
-            <End Role="TB_TIPO" EntitySet="TB_TIPO" />
-            <End Role="TB_MATERIAL" EntitySet="TB_MATERIAL" />
+          <AssociationSet Name="FK_tb_material_tb_tipo" Association="Self.FK_tb_material_tb_tipo">
+            <End Role="tb_tipo" EntitySet="tb_tipo" />
+            <End Role="tb_material" EntitySet="tb_material" />
           </AssociationSet>
-          <AssociationSet Name="FK_VENDA_CLIENTE" Association="Self.FK_VENDA_CLIENTE">
-            <End Role="TB_CLIENTE" EntitySet="TB_CLIENTE" />
-            <End Role="TB_VENDA" EntitySet="TB_VENDA" />
+          <AssociationSet Name="FK_tb_venda_tb_cliente" Association="Self.FK_tb_venda_tb_cliente">
+            <End Role="tb_cliente" EntitySet="tb_cliente" />
+            <End Role="tb_venda" EntitySet="tb_venda" />
           </AssociationSet>
-          <AssociationSet Name="FK_VENDA_FORNECEDOR" Association="Self.FK_VENDA_FORNECEDOR">
-            <End Role="TB_FORNECEDOR" EntitySet="TB_FORNECEDOR" />
-            <End Role="TB_VENDA" EntitySet="TB_VENDA" />
+          <AssociationSet Name="FK_tb_venda_tb_fornecedor" Association="Self.FK_tb_venda_tb_fornecedor">
+            <End Role="tb_fornecedor" EntitySet="tb_fornecedor" />
+            <End Role="tb_venda" EntitySet="tb_venda" />
           </AssociationSet>
-          <AssociationSet Name="FK_VENDA_MATERIAL" Association="Self.FK_VENDA_MATERIAL">
-            <End Role="TB_MATERIAL" EntitySet="TB_MATERIAL" />
-            <End Role="TB_VENDA" EntitySet="TB_VENDA" />
+          <AssociationSet Name="FK_tb_venda_tb_material" Association="Self.FK_tb_venda_tb_material">
+            <End Role="tb_material" EntitySet="tb_material" />
+            <End Role="tb_venda" EntitySet="tb_venda" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VendasDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="TB_CLIENTE">
+        <EntityType Name="tb_cliente">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cli_nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="cli_fone" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
-          <Property Name="cli_cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cli_cpf" Type="Int64" Nullable="false" />
+          <Property Name="cli_nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cli_fone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cli_cidade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="cli_endereco" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="cli_cpf" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TB_VENDA" Relationship="Self.FK_VENDA_CLIENTE" FromRole="TB_CLIENTE" ToRole="TB_VENDA" />
+          <NavigationProperty Name="tb_venda" Relationship="Self.FK_tb_venda_tb_cliente" FromRole="tb_cliente" ToRole="tb_venda" />
         </EntityType>
-        <EntityType Name="TB_FORNECEDOR">
+        <EntityType Name="tb_fornecedor">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="forn_cnpj" Type="Int64" Nullable="false" />
           <Property Name="forn_nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="forn_fone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="forn_fone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="forn_cidade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="forn_endereco" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="forn_cnpj" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TB_MATERIAL" Relationship="Self.FK_MATERIAL_FORNECEDOR" FromRole="TB_FORNECEDOR" ToRole="TB_MATERIAL" />
-          <NavigationProperty Name="TB_VENDA" Relationship="Self.FK_VENDA_FORNECEDOR" FromRole="TB_FORNECEDOR" ToRole="TB_VENDA" />
+          <NavigationProperty Name="tb_material" Relationship="Self.FK_tb_material_tb_fornecedor" FromRole="tb_fornecedor" ToRole="tb_material" />
+          <NavigationProperty Name="tb_venda" Relationship="Self.FK_tb_venda_tb_fornecedor" FromRole="tb_fornecedor" ToRole="tb_venda" />
         </EntityType>
-        <EntityType Name="TB_MATERIAL">
+        <EntityType Name="tb_material">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -179,21 +180,21 @@
           <Property Name="mat_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="data_ent" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="id_tipo" Type="Int32" Nullable="false" />
-          <Property Name="mat_valor" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="mat_valor" Type="Int64" Nullable="false" />
           <Property Name="id_forn" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TB_FORNECEDOR" Relationship="Self.FK_MATERIAL_FORNECEDOR" FromRole="TB_MATERIAL" ToRole="TB_FORNECEDOR" />
-          <NavigationProperty Name="TB_VENDA" Relationship="Self.FK_VENDA_MATERIAL" FromRole="TB_MATERIAL" ToRole="TB_VENDA" />
-          <NavigationProperty Name="TB_TIPO" Relationship="VendasDBModel.FK_MATERIAL_TIPO" FromRole="TB_MATERIAL" ToRole="TB_TIPO" />
+          <NavigationProperty Name="tb_fornecedor" Relationship="Self.FK_tb_material_tb_fornecedor" FromRole="tb_material" ToRole="tb_fornecedor" />
+          <NavigationProperty Name="tb_tipo" Relationship="Self.FK_tb_material_tb_tipo" FromRole="tb_material" ToRole="tb_tipo" />
+          <NavigationProperty Name="tb_venda" Relationship="Self.FK_tb_venda_tb_material" FromRole="tb_material" ToRole="tb_venda" />
         </EntityType>
-        <EntityType Name="TB_TIPO">
+        <EntityType Name="tb_tipo">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tipo_des" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="TB_MATERIAL" Relationship="VendasDBModel.FK_MATERIAL_TIPO" FromRole="TB_TIPO" ToRole="TB_MATERIAL" />
+          <Property Name="descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_material" Relationship="Self.FK_tb_material_tb_tipo" FromRole="tb_tipo" ToRole="tb_material" />
         </EntityType>
-        <EntityType Name="TB_VENDA">
+        <EntityType Name="tb_venda">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -202,130 +203,130 @@
           <Property Name="id_cli" Type="Int32" Nullable="false" />
           <Property Name="id_mat" Type="Int32" Nullable="false" />
           <Property Name="venda_data" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="TB_CLIENTE" Relationship="Self.FK_VENDA_CLIENTE" FromRole="TB_VENDA" ToRole="TB_CLIENTE" />
-          <NavigationProperty Name="TB_FORNECEDOR" Relationship="Self.FK_VENDA_FORNECEDOR" FromRole="TB_VENDA" ToRole="TB_FORNECEDOR" />
-          <NavigationProperty Name="TB_MATERIAL" Relationship="Self.FK_VENDA_MATERIAL" FromRole="TB_VENDA" ToRole="TB_MATERIAL" />
+          <NavigationProperty Name="tb_cliente" Relationship="Self.FK_tb_venda_tb_cliente" FromRole="tb_venda" ToRole="tb_cliente" />
+          <NavigationProperty Name="tb_fornecedor" Relationship="Self.FK_tb_venda_tb_fornecedor" FromRole="tb_venda" ToRole="tb_fornecedor" />
+          <NavigationProperty Name="tb_material" Relationship="Self.FK_tb_venda_tb_material" FromRole="tb_venda" ToRole="tb_material" />
         </EntityType>
-        <Association Name="FK_VENDA_CLIENTE">
-          <End Role="TB_CLIENTE" Type="Self.TB_CLIENTE" Multiplicity="1" />
-          <End Role="TB_VENDA" Type="Self.TB_VENDA" Multiplicity="*" />
+        <Association Name="FK_tb_venda_tb_cliente">
+          <End Role="tb_cliente" Type="Self.tb_cliente" Multiplicity="1" />
+          <End Role="tb_venda" Type="Self.tb_venda" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_CLIENTE">
+            <Principal Role="tb_cliente">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="TB_VENDA">
+            <Dependent Role="tb_venda">
               <PropertyRef Name="id_cli" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MATERIAL_FORNECEDOR">
-          <End Role="TB_FORNECEDOR" Type="Self.TB_FORNECEDOR" Multiplicity="1" />
-          <End Role="TB_MATERIAL" Type="Self.TB_MATERIAL" Multiplicity="*" />
+        <Association Name="FK_tb_material_tb_fornecedor">
+          <End Role="tb_fornecedor" Type="Self.tb_fornecedor" Multiplicity="1" />
+          <End Role="tb_material" Type="Self.tb_material" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_FORNECEDOR">
+            <Principal Role="tb_fornecedor">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="TB_MATERIAL">
+            <Dependent Role="tb_material">
               <PropertyRef Name="id_forn" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VENDA_FORNECEDOR">
-          <End Role="TB_FORNECEDOR" Type="Self.TB_FORNECEDOR" Multiplicity="1" />
-          <End Role="TB_VENDA" Type="Self.TB_VENDA" Multiplicity="*" />
+        <Association Name="FK_tb_venda_tb_fornecedor">
+          <End Role="tb_fornecedor" Type="Self.tb_fornecedor" Multiplicity="1" />
+          <End Role="tb_venda" Type="Self.tb_venda" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_FORNECEDOR">
+            <Principal Role="tb_fornecedor">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="TB_VENDA">
+            <Dependent Role="tb_venda">
               <PropertyRef Name="id_fornec" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VENDA_MATERIAL">
-          <End Role="TB_MATERIAL" Type="Self.TB_MATERIAL" Multiplicity="1" />
-          <End Role="TB_VENDA" Type="Self.TB_VENDA" Multiplicity="*" />
+        <Association Name="FK_tb_material_tb_tipo">
+          <End Role="tb_tipo" Type="Self.tb_tipo" Multiplicity="1" />
+          <End Role="tb_material" Type="Self.tb_material" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_MATERIAL">
+            <Principal Role="tb_tipo">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="TB_VENDA">
-              <PropertyRef Name="id_mat" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="VendasDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="TB_CLIENTE" EntityType="Self.TB_CLIENTE" />
-          <EntitySet Name="TB_FORNECEDOR" EntityType="Self.TB_FORNECEDOR" />
-          <EntitySet Name="TB_MATERIAL" EntityType="Self.TB_MATERIAL" />
-          <EntitySet Name="TB_TIPO" EntityType="Self.TB_TIPO" />
-          <EntitySet Name="TB_VENDA" EntityType="Self.TB_VENDA" />
-          <AssociationSet Name="FK_VENDA_CLIENTE" Association="Self.FK_VENDA_CLIENTE">
-            <End Role="TB_CLIENTE" EntitySet="TB_CLIENTE" />
-            <End Role="TB_VENDA" EntitySet="TB_VENDA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MATERIAL_FORNECEDOR" Association="Self.FK_MATERIAL_FORNECEDOR">
-            <End Role="TB_FORNECEDOR" EntitySet="TB_FORNECEDOR" />
-            <End Role="TB_MATERIAL" EntitySet="TB_MATERIAL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VENDA_FORNECEDOR" Association="Self.FK_VENDA_FORNECEDOR">
-            <End Role="TB_FORNECEDOR" EntitySet="TB_FORNECEDOR" />
-            <End Role="TB_VENDA" EntitySet="TB_VENDA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VENDA_MATERIAL" Association="Self.FK_VENDA_MATERIAL">
-            <End Role="TB_MATERIAL" EntitySet="TB_MATERIAL" />
-            <End Role="TB_VENDA" EntitySet="TB_VENDA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MATERIAL_TIPO" Association="VendasDBModel.FK_MATERIAL_TIPO">
-            <End Role="TB_TIPO" EntitySet="TB_TIPO" />
-            <End Role="TB_MATERIAL" EntitySet="TB_MATERIAL" />
-          </AssociationSet>
-        </EntityContainer>
-        <Association Name="FK_MATERIAL_TIPO">
-          <End Type="VendasDBModel.TB_TIPO" Role="TB_TIPO" Multiplicity="1" />
-          <End Type="VendasDBModel.TB_MATERIAL" Role="TB_MATERIAL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_TIPO">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="TB_MATERIAL">
+            <Dependent Role="tb_material">
               <PropertyRef Name="id_tipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_venda_tb_material">
+          <End Role="tb_material" Type="Self.tb_material" Multiplicity="1" />
+          <End Role="tb_venda" Type="Self.tb_venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_venda">
+              <PropertyRef Name="id_mat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VendasDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_cliente" EntityType="Self.tb_cliente" />
+          <EntitySet Name="tb_fornecedor" EntityType="Self.tb_fornecedor" />
+          <EntitySet Name="tb_material" EntityType="Self.tb_material" />
+          <EntitySet Name="tb_tipo" EntityType="Self.tb_tipo" />
+          <EntitySet Name="tb_venda" EntityType="Self.tb_venda" />
+          <AssociationSet Name="FK_tb_venda_tb_cliente" Association="Self.FK_tb_venda_tb_cliente">
+            <End Role="tb_cliente" EntitySet="tb_cliente" />
+            <End Role="tb_venda" EntitySet="tb_venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_material_tb_fornecedor" Association="Self.FK_tb_material_tb_fornecedor">
+            <End Role="tb_fornecedor" EntitySet="tb_fornecedor" />
+            <End Role="tb_material" EntitySet="tb_material" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_venda_tb_fornecedor" Association="Self.FK_tb_venda_tb_fornecedor">
+            <End Role="tb_fornecedor" EntitySet="tb_fornecedor" />
+            <End Role="tb_venda" EntitySet="tb_venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_material_tb_tipo" Association="Self.FK_tb_material_tb_tipo">
+            <End Role="tb_tipo" EntitySet="tb_tipo" />
+            <End Role="tb_material" EntitySet="tb_material" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_venda_tb_material" Association="Self.FK_tb_venda_tb_material">
+            <End Role="tb_material" EntitySet="tb_material" />
+            <End Role="tb_venda" EntitySet="tb_venda" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="VendasDBModelStoreContainer" CdmEntityContainer="VendasDBEntities">
-          <EntitySetMapping Name="TB_CLIENTE">
-            <EntityTypeMapping TypeName="VendasDBModel.TB_CLIENTE">
-              <MappingFragment StoreEntitySet="TB_CLIENTE">
+        <EntityContainerMapping StorageEntityContainer="VendasDBModelStoreContainer" CdmEntityContainer="VendasDBEntities1">
+          <EntitySetMapping Name="tb_cliente">
+            <EntityTypeMapping TypeName="VendasDBModel.tb_cliente">
+              <MappingFragment StoreEntitySet="tb_cliente">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cli_cpf" ColumnName="cli_cpf" />
                 <ScalarProperty Name="cli_nome" ColumnName="cli_nome" />
                 <ScalarProperty Name="cli_fone" ColumnName="cli_fone" />
                 <ScalarProperty Name="cli_cidade" ColumnName="cli_cidade" />
                 <ScalarProperty Name="cli_endereco" ColumnName="cli_endereco" />
-                <ScalarProperty Name="cli_cpf" ColumnName="cli_cpf" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TB_FORNECEDOR">
-            <EntityTypeMapping TypeName="VendasDBModel.TB_FORNECEDOR">
-              <MappingFragment StoreEntitySet="TB_FORNECEDOR">
+          <EntitySetMapping Name="tb_fornecedor">
+            <EntityTypeMapping TypeName="VendasDBModel.tb_fornecedor">
+              <MappingFragment StoreEntitySet="tb_fornecedor">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="forn_cnpj" ColumnName="forn_cnpj" />
                 <ScalarProperty Name="forn_nome" ColumnName="forn_nome" />
                 <ScalarProperty Name="forn_fone" ColumnName="forn_fone" />
                 <ScalarProperty Name="forn_cidade" ColumnName="forn_cidade" />
                 <ScalarProperty Name="forn_endereco" ColumnName="forn_endereco" />
-                <ScalarProperty Name="forn_cnpj" ColumnName="forn_cnpj" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TB_MATERIAL">
-            <EntityTypeMapping TypeName="VendasDBModel.TB_MATERIAL">
-              <MappingFragment StoreEntitySet="TB_MATERIAL">
+          <EntitySetMapping Name="tb_material">
+            <EntityTypeMapping TypeName="VendasDBModel.tb_material">
+              <MappingFragment StoreEntitySet="tb_material">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="mat_desc" ColumnName="mat_desc" />
                 <ScalarProperty Name="data_ent" ColumnName="data_ent" />
@@ -335,17 +336,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TB_TIPO">
-            <EntityTypeMapping TypeName="VendasDBModel.TB_TIPO">
-              <MappingFragment StoreEntitySet="TB_TIPO">
+          <EntitySetMapping Name="tb_tipo">
+            <EntityTypeMapping TypeName="VendasDBModel.tb_tipo">
+              <MappingFragment StoreEntitySet="tb_tipo">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="tipo_des" ColumnName="tipo_des" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TB_VENDA">
-            <EntityTypeMapping TypeName="VendasDBModel.TB_VENDA">
-              <MappingFragment StoreEntitySet="TB_VENDA">
+          <EntitySetMapping Name="tb_venda">
+            <EntityTypeMapping TypeName="VendasDBModel.tb_venda">
+              <MappingFragment StoreEntitySet="tb_venda">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_fornec" ColumnName="id_fornec" />
                 <ScalarProperty Name="id_cli" ColumnName="id_cli" />

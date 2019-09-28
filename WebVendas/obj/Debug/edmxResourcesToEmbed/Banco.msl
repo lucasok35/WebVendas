@@ -1,33 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="VendasDBModelStoreContainer" CdmEntityContainer="VendasDBEntities">
-    <EntitySetMapping Name="TB_CLIENTE">
-      <EntityTypeMapping TypeName="VendasDBModel.TB_CLIENTE">
-        <MappingFragment StoreEntitySet="TB_CLIENTE">
+  <EntityContainerMapping StorageEntityContainer="VendasDBModelStoreContainer" CdmEntityContainer="VendasDBEntities1">
+    <EntitySetMapping Name="tb_cliente">
+      <EntityTypeMapping TypeName="VendasDBModel.tb_cliente">
+        <MappingFragment StoreEntitySet="tb_cliente">
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="cli_cpf" ColumnName="cli_cpf" />
           <ScalarProperty Name="cli_nome" ColumnName="cli_nome" />
           <ScalarProperty Name="cli_fone" ColumnName="cli_fone" />
           <ScalarProperty Name="cli_cidade" ColumnName="cli_cidade" />
           <ScalarProperty Name="cli_endereco" ColumnName="cli_endereco" />
-          <ScalarProperty Name="cli_cpf" ColumnName="cli_cpf" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TB_FORNECEDOR">
-      <EntityTypeMapping TypeName="VendasDBModel.TB_FORNECEDOR">
-        <MappingFragment StoreEntitySet="TB_FORNECEDOR">
+    <EntitySetMapping Name="tb_fornecedor">
+      <EntityTypeMapping TypeName="VendasDBModel.tb_fornecedor">
+        <MappingFragment StoreEntitySet="tb_fornecedor">
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="forn_cnpj" ColumnName="forn_cnpj" />
           <ScalarProperty Name="forn_nome" ColumnName="forn_nome" />
           <ScalarProperty Name="forn_fone" ColumnName="forn_fone" />
           <ScalarProperty Name="forn_cidade" ColumnName="forn_cidade" />
           <ScalarProperty Name="forn_endereco" ColumnName="forn_endereco" />
-          <ScalarProperty Name="forn_cnpj" ColumnName="forn_cnpj" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TB_MATERIAL">
-      <EntityTypeMapping TypeName="VendasDBModel.TB_MATERIAL">
-        <MappingFragment StoreEntitySet="TB_MATERIAL">
+    <EntitySetMapping Name="tb_material">
+      <EntityTypeMapping TypeName="VendasDBModel.tb_material">
+        <MappingFragment StoreEntitySet="tb_material">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="mat_desc" ColumnName="mat_desc" />
           <ScalarProperty Name="data_ent" ColumnName="data_ent" />
@@ -37,17 +37,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TB_TIPO">
-      <EntityTypeMapping TypeName="VendasDBModel.TB_TIPO">
-        <MappingFragment StoreEntitySet="TB_TIPO">
+    <EntitySetMapping Name="tb_tipo">
+      <EntityTypeMapping TypeName="VendasDBModel.tb_tipo">
+        <MappingFragment StoreEntitySet="tb_tipo">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="tipo_des" ColumnName="tipo_des" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TB_VENDA">
-      <EntityTypeMapping TypeName="VendasDBModel.TB_VENDA">
-        <MappingFragment StoreEntitySet="TB_VENDA">
+    <EntitySetMapping Name="tb_venda">
+      <EntityTypeMapping TypeName="VendasDBModel.tb_venda">
+        <MappingFragment StoreEntitySet="tb_venda">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="id_fornec" ColumnName="id_fornec" />
           <ScalarProperty Name="id_cli" ColumnName="id_cli" />

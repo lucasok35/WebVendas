@@ -12,7 +12,7 @@ namespace WebVendas
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_VENDA
+    public partial class tb_venda
     {
         public int id { get; set; }
         public int id_fornec { get; set; }
@@ -20,8 +20,8 @@ namespace WebVendas
         public int id_mat { get; set; }
         public System.DateTime venda_data { get; set; }
     
-        public virtual TB_CLIENTE TB_CLIENTE { get; set; }
-        public virtual TB_FORNECEDOR TB_FORNECEDOR { get; set; }
-        public virtual TB_MATERIAL TB_MATERIAL { get; set; }
+        public virtual tb_cliente tb_cliente { get; set; }
+        public virtual tb_fornecedor tb_fornecedor { get; set; }
+        public virtual tb_material tb_material { get; set; }
     }
 }

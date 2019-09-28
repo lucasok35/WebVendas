@@ -12,25 +12,25 @@ namespace WebVendas
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_FORNECEDOR
+    public partial class tb_fornecedor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_FORNECEDOR()
+        public tb_fornecedor()
         {
-            this.TB_MATERIAL = new HashSet<TB_MATERIAL>();
-            this.TB_VENDA = new HashSet<TB_VENDA>();
+            this.tb_material = new HashSet<tb_material>();
+            this.tb_venda = new HashSet<tb_venda>();
         }
     
         public int id { get; set; }
+        public long forn_cnpj { get; set; }
         public string forn_nome { get; set; }
         public string forn_fone { get; set; }
         public string forn_cidade { get; set; }
         public string forn_endereco { get; set; }
-        public int forn_cnpj { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_MATERIAL> TB_MATERIAL { get; set; }
+        public virtual ICollection<tb_material> tb_material { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_VENDA> TB_VENDA { get; set; }
+        public virtual ICollection<tb_venda> tb_venda { get; set; }
     }
 }

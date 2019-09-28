@@ -12,18 +12,18 @@ namespace WebVendas
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_TIPO
+    public partial class tb_tipo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_TIPO()
+        public tb_tipo()
         {
-            this.TB_MATERIAL = new HashSet<TB_MATERIAL>();
+            this.tb_material = new HashSet<tb_material>();
         }
     
         public int id { get; set; }
-        public string tipo_des { get; set; }
+        public string descricao { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_MATERIAL> TB_MATERIAL { get; set; }
+        public virtual ICollection<tb_material> tb_material { get; set; }
     }
 }
